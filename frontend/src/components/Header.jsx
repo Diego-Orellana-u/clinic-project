@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const headerTitles = [
   {name: 'Nosotros', link: '/nosotros'},
   {name: 'Contacto', link: '/contacto'},
-  {name: 'Servicios', link: '/servicios'},
+  {name: 'Servicios', link: '/dashboard'},
   {name: 'Información Paciente', link: '/informacion-paciente'},
   {name: 'Reserva de hora', link: '/agendar-hora'},
 ]

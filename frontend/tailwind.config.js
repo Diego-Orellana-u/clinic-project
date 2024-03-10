@@ -7,8 +7,6 @@ export default {
   theme: {
     extend: {},
     fontFamily: {
-			'forma': ['forma-djr-text'],
-      'eaves': ['mr-eaves-sans'],
       'rubik': ['rubik']
 		}
   },
