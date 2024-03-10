@@ -1,74 +1,42 @@
-import { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-import FlexBetween from "../FlexBetween";
-import profileImage from "../../assets/profile.jpeg"
+import { useState } from "react";
+import SidebarSelect from "./SidebarSelect";
+import { sidebarSections } from "../../data/sidebarSections.jsx";
+import { Link } from "react-router-dom";
+import MenuIcon from "../icons/MenuIcon.jsx"
 
-const navItems = [
-  {
-    text: "Dashboard",
-    icon: <HomeOutlined />,
-  },
-  {
-    text: "Usuario",
-    icon: null,
-  },
-  {
-    text: "Horas Medicas",
-    icon: <ShoppingCartOutlined />,
-  },
-  {
-    text: "Pacientes",
-    icon: <Groups2Outlined />,
-  },
-  {
-    text: "Ventas",
-    icon: null,
-  },
-  {
-    text: "General",
-    icon: <PointOfSaleOutlined />,
-  },
-  {
-    text: "Diario",
-    icon: <TodayOutlined />,
-  },
-  {
-    text: "Mensual",
-    icon: <CalendarMonthOutlined />,
-  },
-  {
-    text: "Breakdown",
-    icon: <PieChartOutlined />,
-  },
-  {
-    text: "Management",
-    icon: null,
-  },
-  {
-    text: "Administrador",
-    icon: <AdminPanelSettingsOutlined />,
-  },
-];
+export default function DashSidebar({ setActiveSidebar, activeSidebar}){
 
+  const [ activeIndex, setActiveIndex ] = useState(0)
 
-export default function DashSidebar({
-  drawerWidth,
-  isSidebarOpen,
-  setIsSidebarOpen,
-  isNonMobile
-}){
-  const { pathname } = useLocation()
-  const [ active, setActive ] = useState("")
-  const navigate = useNavigate()
-  const theme = useTheme()
-
-  useEffect(() => {
-    setActive(pathname.substring(1))
-  },[pathname])
-
+  const handleActive = (num) => {
+    setActiveIndex(num)
+  }
+  
   return (
-   <article>
-    
-   </article>
+    <article className="absolute top-0 left-0 w-[80%] min-[425px]:w-[350px] bg-[#364855] h-[100vh] text-white" style={{transform: activeSidebar ? "" : `translateX(-500px)`}}>
+      <div className="h-[75px] pl-[2rem] min-[375px]:pl-[3rem] flex items-center ">
+        <h3 className="text-2xl pr-[2.5rem]">CLINICA LONDRES</h3>
+        <div className="pb-[.3rem]">
+          <MenuIcon onClick={() => setActiveSidebar(!activeSidebar)} />
+        </div>
+      </div>
+
+      <div>
+        {
+          sidebarSections.map((section) => (
+            <div key={section.title} className="mb-[2rem]">
+              <span className="pl-[2rem] min-[375px]:pl-[3rem]">{section.title}</span>
+              {
+                section.subSections.map(([title, index, icon, link]) => (
+                  <Link to={link} key={title}>
+                    <SidebarSelect onClick={() => handleActive(index, title)} isActive={activeIndex == index} title={title} icon={icon}/>
+                  </Link>
+                ))
+              }
+            </div>
+          ))
+        }
+      </div>
+    </article>
   );
 }

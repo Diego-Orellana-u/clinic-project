@@ -9,7 +9,7 @@ import Contacto from './components/Contacto.jsx'
 import Dashboard from './components/Dashboard/Dashboard.jsx'
 
 
-export default function App() {
+export default function App({ setActiveSidebar, activeSidebar}) {
 
   return (
     <div className='font-rubik font-light text-left'>
@@ -22,7 +22,7 @@ export default function App() {
           <Route path='contacto' element={<Contacto />} />
         </Route>
         <Route path='dashboard' element={<Dashboard />}>
-          {/* <Route path='paciente' element={} /> */}
+          {/* <Route path='rut' element={} /> */}
         </Route>
       </Routes>
     </div>
