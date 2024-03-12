@@ -5,7 +5,7 @@ import { useState } from "react"
 
 const DashLayout = () => {
 
-  const [ activeSidebar, setActiveSidebar ] = useState(true)
+  const [ activeSidebar, setActiveSidebar ] = useState(false)
 
   return (
     <>

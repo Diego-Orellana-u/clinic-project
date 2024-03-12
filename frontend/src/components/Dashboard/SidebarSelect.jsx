@@ -11,18 +11,8 @@ export default function SidebarSelect({ onClick, isActive, title, icon }){
         <span className="text-[1.1rem]">{title}</span>
       </div>
       <div>
-        <RightIcon />
+        <RightIcon fill={"white"} />
       </div>
     </div>
   )
 }
-
-// const navigate = useNavigate()
-
-// console.log(isActive)
-// useEffect(() => {
-//   if(isActive && title !== 'Dashboard'){
-//     navigate(`/dashboard/${title.toLowerCase()}`)
-//   }
-// },[isActive])
-

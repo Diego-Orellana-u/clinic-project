@@ -13,7 +13,7 @@ export default function DashSidebar({ setActiveSidebar, activeSidebar}){
   }
   
   return (
-    <article className="absolute top-0 left-0 w-[80%] min-[425px]:w-[350px] bg-[#364855] h-[100vh] text-white" style={{transform: activeSidebar ? "" : `translateX(-500px)`}}>
+    <article className="fixed top-0 left-0 w-[80%] min-[425px]:w-[350px] bg-[#364855] min-h-[100vh] text-white transition ease-linear duration-300" style={{transform: activeSidebar ? "" : `translateX(-500px)`}}>
       <div className="h-[75px] pl-[2rem] min-[375px]:pl-[3rem] flex items-center ">
         <h3 className="text-2xl pr-[2.5rem]">CLINICA LONDRES</h3>
         <div className="pb-[.3rem]">

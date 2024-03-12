@@ -7,9 +7,12 @@ import Login from './components/Login.jsx'
 import Nosotros from './components/Nosotros.jsx'
 import Contacto from './components/Contacto.jsx'
 import Dashboard from './components/Dashboard/Dashboard.jsx'
+import Horas from './components/Dashboard/Horas.jsx'
+import Horario from './components/Dashboard/Horario.jsx'
+import VistaGeneral from './components/Dashboard/VistaGeneral.jsx'
 
 
-export default function App({ setActiveSidebar, activeSidebar}) {
+export default function App() {
 
   return (
     <div className='font-rubik font-light text-left'>
@@ -22,7 +25,13 @@ export default function App({ setActiveSidebar, activeSidebar}) {
           <Route path='contacto' element={<Contacto />} />
         </Route>
         <Route path='dashboard' element={<Dashboard />}>
-          {/* <Route path='rut' element={} /> */}
+          <Route path='vista-general' element={<VistaGeneral />} />
+          <Route path='horario' element={<Horario />} />
+          <Route path='horas-agendadas' element={<Horas />} />
+        </Route>
+        
+        <Route path='*' element={<div>404 soft error</div>}>
+          {/* TODO: add redirection to real server 404 */}
         </Route>
       </Routes>
     </div>
