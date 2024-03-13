@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import TwoLines from "../../icons/TwoLines";
 import X from "../../icons/X";
+import Trash from "../../icons/Trash";
 import Clock from "../../icons/Clock";
 import GlobalContext from "../../../context/GlobalContext";
 import DeepMenu from "../../icons/DeepMenu";
@@ -17,10 +18,37 @@ const labelClasses = [
 ];
 
 export default function EventModal() {
-  const { setShowEventModal, daySelected } = useContext(GlobalContext);
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [selectedLabel, setSelectedLabel] = useState(labelClasses[0]);
+  const { setShowEventModal, daySelected, dispatchCalEvent, selectedEvent } =
+    useContext(GlobalContext);
+
+  const [title, setTitle] = useState(selectedEvent ? selectedEvent.title : "");
+  const [description, setDescription] = useState(
+    selectedEvent ? selectedEvent.description : ""
+  );
+  const [selectedLabel, setSelectedLabel] = useState(
+    selectedEvent
+      ? labelClasses.find((lbl) => lbl === selectedEvent.label)
+      : labelClasses[0]
+  );
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    const calendarEvent = {
+      title,
+      description,
+      label: selectedLabel,
+      day: daySelected.valueOf(),
+      id: selectedEvent ? selectedEvent.id : Date.now(),
+    };
+
+    if (selectedEvent) {
+      dispatchCalEvent({ type: "update", payload: calendarEvent });
+    } else {
+      dispatchCalEvent({ type: "push", payload: calendarEvent });
+    }
+
+    setShowEventModal(false);
+  }
 
   return (
     <div className="h-screen w-full fixed left-0 top-0 flex justify-center items-center">
@@ -29,11 +57,24 @@ export default function EventModal() {
           <span className="text-gray-400">
             <TwoLines />
           </span>
-          <button onClick={() => setShowEventModal(false)}>
-            <span className="text-gray-400">
-              <X />
-            </span>
-          </button>
+          <div className="flex">
+            {selectedEvent && (
+              <span
+                onClick={() => {
+                  dispatchCalEvent({ type: "delete", payload: selectedEvent });
+                  setShowEventModal(false);
+                }}
+                className="text-gray-400 cursor-pointer"
+              >
+                <Trash />
+              </span>
+            )}
+            <button onClick={() => setShowEventModal(false)}>
+              <span className="text-gray-400">
+                <X />
+              </span>
+            </button>
+          </div>
         </header>
         <div className="p-3">
           <div className="grid grid-cols-1/5 items-end gap-y-7">
@@ -90,6 +131,7 @@ export default function EventModal() {
         <footer className="flex justify-end border-t p-3 mt-5">
           <button
             type="submit"
+            onClick={handleSubmit}
             className="bg-blue-500 hover:bg-blue-600 px-6 py-2 rounded text-white"
           >
             Save
