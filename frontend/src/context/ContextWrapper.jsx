@@ -1,21 +1,33 @@
 import { useEffect, useState } from "react";
 import GlobalContext from "./GlobalContext";
-import dayjs from 'dayjs'
+import dayjs from "dayjs";
 
-export function ContextWrapper({ children }){
-  const [monthIndex, setMonthIndex] = useState(dayjs().month())
-  const [smallCalendarMonth, setSmallCalendarMonth] = useState(null)
-  const [daySelected, setDaySelected] = useState(null)
+export function ContextWrapper({ children }) {
+  const [monthIndex, setMonthIndex] = useState(dayjs().month());
+  const [smallCalendarMonth, setSmallCalendarMonth] = useState(null);
+  const [daySelected, setDaySelected] = useState(dayjs());
+  const [showEventModal, setShowEventModal] = useState(false);
 
   useEffect(() => {
-    if(smallCalendarMonth !== null){
-      setMonthIndex(smallCalendarMonth)
+    if (smallCalendarMonth !== null) {
+      setMonthIndex(smallCalendarMonth);
     }
-  },[smallCalendarMonth])
+  }, [smallCalendarMonth]);
 
-  return(
-    <GlobalContext.Provider value={{monthIndex, setMonthIndex, smallCalendarMonth, setSmallCalendarMonth, daySelected, setDaySelected}}>
+  return (
+    <GlobalContext.Provider
+      value={{
+        monthIndex,
+        setMonthIndex,
+        smallCalendarMonth,
+        setSmallCalendarMonth,
+        daySelected,
+        setDaySelected,
+        showEventModal,
+        setShowEventModal,
+      }}
+    >
       {children}
     </GlobalContext.Provider>
-  )
+  );
 }

@@ -1,17 +1,16 @@
 /** @type {import('tailwindcss').Config} */
+
 export default {
-  content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
-  ],
+  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
-    extend: {},
+    extend: {
+      gridTemplateColumns: {
+        "1/5": "1fr 5fr",
+      },
+    },
     fontFamily: {
-      'rubik': ['rubik']
-		},
-    // gridTemplateColumns: {
-    //   "1/5": "1fr 5fr"
-    // }
+      rubik: ["rubik"],
+    },
   },
   plugins: [],
-}
+};

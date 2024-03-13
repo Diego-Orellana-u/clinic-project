@@ -20,9 +20,9 @@ export default function App() {
         <Route path='/' element={<Layout />}>
           <Route index element={<MainContent />} />
           <Route path='agendar-hora' element={<AgendarHora />} />
-          <Route path='login' element={<Login />} />
-          <Route path='nosotros' element={<Nosotros />} />
-          <Route path='contacto' element={<Contacto />} />
+          <Route path='login' element={<Login />} />              {/* TODO: Complete login */}
+          <Route path='nosotros' element={<Nosotros />} />        {/* TODO: Complete nosotros */}
+          <Route path='contacto' element={<Contacto />} />        {/* TODO: Complete contact */}
         </Route>
         <Route path='dashboard' element={<Dashboard />}>
           <Route path='vista-general' element={<VistaGeneral />} />
