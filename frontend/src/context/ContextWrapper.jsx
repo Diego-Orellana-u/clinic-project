@@ -23,7 +23,6 @@ function initEvents() {
 
 export function ContextWrapper({ children }) {
   const [monthIndex, setMonthIndex] = useState(dayjs().month());
-  const [smallCalendarMonth, setSmallCalendarMonth] = useState(null);
   const [daySelected, setDaySelected] = useState(dayjs());
   const [showEventModal, setShowEventModal] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState(null);
@@ -60,12 +59,6 @@ export function ContextWrapper({ children }) {
   }, [savedEvents]);
 
   useEffect(() => {
-    if (smallCalendarMonth !== null) {
-      setMonthIndex(smallCalendarMonth);
-    }
-  }, [smallCalendarMonth]);
-
-  useEffect(() => {
     if (!showEventModal) {
       setSelectedEvent(null);
     }
@@ -80,8 +73,6 @@ export function ContextWrapper({ children }) {
       value={{
         monthIndex,
         setMonthIndex,
-        smallCalendarMonth,
-        setSmallCalendarMonth,
         daySelected,
         setDaySelected,
         showEventModal,
@@ -100,3 +91,11 @@ export function ContextWrapper({ children }) {
     </GlobalContext.Provider>
   );
 }
+
+// Explanation of this contextwrapper:
+
+// States:
+// monthIndex, setMonthIndex: Represents the current month where the user is.
+// It uses dayjs().month() as a default value to obtain the current month and start from there.
+
+//

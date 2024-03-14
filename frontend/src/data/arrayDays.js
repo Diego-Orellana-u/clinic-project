@@ -5,20 +5,14 @@ export function getMonth(month = dayjs().month()) {
   const year = dayjs().year();
   const firstDayOfTheMonth = dayjs(new Date(year, month, 1)).day();
 
-  let currentMonthCount = 0 - firstDayOfTheMonth;
+  let currentMonthCount = 1 - firstDayOfTheMonth;
 
   const daysMatrix = [[], [], [], [], []].map(() => {
-    return [[], [], [], [], [], [], []].fill(null).map(() => {
+    //5 rows for every column
+    return [[null], [null], [null], [null], [null], [null], [null]].map(() => {
       currentMonthCount++;
       return dayjs(new Date(year, month, currentMonthCount));
     });
   });
   return daysMatrix;
 }
-
-const date = dayjs().month();
-console.log(date);
-
-const d = dayjs(new Date(2024, 2, 1)).day();
-
-console.log(d);

@@ -9,6 +9,7 @@ import EventModal from "./EventModal.jsx";
 export default function Scheduler() {
   const [currentMonth, setCurrentMonth] = useState(getMonth());
   const { monthIndex, showEventModal } = useContext(GlobalContext);
+  console.log(currentMonth);
 
   useEffect(() => {
     setCurrentMonth(getMonth(monthIndex));
