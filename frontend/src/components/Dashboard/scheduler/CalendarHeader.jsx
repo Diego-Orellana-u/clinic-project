@@ -1,8 +1,7 @@
 import { useContext } from "react";
-import LeftIcon from "../../icons/LeftIcon";
-import RightIcon from "../../icons/RightIcon";
 import GlobalContext from "../../../context/GlobalContext";
 import dayjs from "dayjs";
+import ChevronBtns from "./ChevronBtns";
 
 export default function CalendarHeader() {
   const { monthIndex, setMonthIndex } = useContext(GlobalContext);
@@ -30,20 +29,7 @@ export default function CalendarHeader() {
         Today
       </button>
 
-      <div className="flex gap-x-6">
-        <button
-          onClick={handlePrevMonth}
-          className="cursor-pointer text-gray-600"
-        >
-          <LeftIcon fill={"black"} />
-        </button>
-        <button
-          onClick={handleNextMonth}
-          className="cursor-pointer text-gray-600"
-        >
-          <RightIcon fill={"black"} />
-        </button>
-      </div>
+      <ChevronBtns onBigPrev={handlePrevMonth} onBigNext={handleNextMonth} />
 
       <h2 className="ml-4 text-xl font-normal">
         {dayjs(new Date(dayjs().year(), monthIndex)).format("MMMM YYYY")}

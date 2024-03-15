@@ -1,9 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
 import dayjs from "dayjs";
 import { getMonth } from "../../../data/arrayDays.js";
-import LeftIcon from "../../icons/LeftIcon";
-import RightIcon from "../../icons/RightIcon";
 import GlobalContext from "../../../context/GlobalContext";
+import ChevronBtns from "./ChevronBtns.jsx";
 
 export default function SmallCalendar() {
   const [currentMonthIdx, setCurrentMonthIdx] = useState(dayjs().month());
@@ -56,18 +55,10 @@ export default function SmallCalendar() {
           {dayjs(new Date(dayjs().year(), currentMonthIdx)).format("MMMM YYYY")}
         </p>
 
-        <div className="flex gap-x-6">
-          <button onClick={handlePrevMonth}>
-            <span className="cursor-pointer text-gray-600">
-              <LeftIcon fill={"black"} />
-            </span>
-          </button>
-          <button onClick={handleNextMonth}>
-            <span className="cursor-pointer text-gray-600">
-              <RightIcon fill={"black"} />
-            </span>
-          </button>
-        </div>
+        <ChevronBtns
+          onSmallPrev={handlePrevMonth}
+          onSmallNext={handleNextMonth}
+        />
       </header>
       <div className="grid grid-cols-7 grid-rows-6">
         {monthArray[0].map((day, i) => (
