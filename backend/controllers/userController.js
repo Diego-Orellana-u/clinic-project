@@ -58,14 +58,14 @@ const createNewUser = asyncHandler(async (req, res) => {
 // @access Private
 
 const updateUser = asyncHandler(async (req, res) => {
-  const { userName, id, role, active,  password } = req.body
+  const { userName, _id, role, active,  password } = req.body
 
 
-  if(!id || !userName || !Array.isArray(role) || !role.length || typeof active !== 'boolean'){
+  if(!_id || !userName || !Array.isArray(role) || !role.length || typeof active !== 'boolean'){
     return res.status(400).json({ message: "Hay datos faltantes"})
   } 
 
-  const user = await User.findById(id).exec()
+  const user = await User.findById(_id).exec()
 
   if(!user){
     return res.status(400).json({ message: "User not found"}) 
@@ -73,7 +73,7 @@ const updateUser = asyncHandler(async (req, res) => {
 
   const duplicateUser = await User.findOne({ userName }).lean().exec()
 
-  if(duplicateUser && duplicateUser?._id.toString() !== id){
+  if(duplicateUser && duplicateUser?._id.toString() !== _id){
     return res.status(409).json({ message: "Este nombre de usuario ya existe"})
   }
 
@@ -97,7 +97,25 @@ const updateUser = asyncHandler(async (req, res) => {
 
 
 const deleteUser = asyncHandler(async (req, res) => {
+  const { _id, userName } = req.body
 
+  if(!_id){
+    return res.status(400).json({message: "id no encontrada"})
+  }
+
+  const user = await User.findById(_id).exec()
+
+  if(!user){
+    return res.status(400).json({message: "Usuario no encontrado"})
+  }
+
+  const deleted = await user.deleteOne()
+
+  if(deleted){
+    const reply = `User ${userName} with ID ${_id} deleted`
+  
+    res.status(200).json({ message: reply})
+  }
 })
 
-module.exports = { getAllUsers, createNewUser, updateUser, deleteUser}
+module.exports = { getAllUsers, createNewUser, updateUser, deleteUser }

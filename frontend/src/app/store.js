@@ -3,8 +3,8 @@ import darkReducer from "../features/darkSlice";
 
 const darkStore = configureStore({
   reducer: {
-    dark: darkReducer
-  }
-})
+    dark: darkReducer,
+  },
+});
 
-export default darkStore
+export default darkStore;

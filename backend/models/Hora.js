@@ -2,7 +2,12 @@ const mongoose = require('mongoose')
 const AutoIncrement = require('mongoose-sequence')(mongoose)
 
 const horaSchema = new mongoose.Schema({
-  fechaAgendada: {
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: true,
+    ref: 'User'
+  },
+  fechaHora: {
     type: String,
     required: true
   },
@@ -30,13 +35,10 @@ const horaSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  precio: {
-    type: String,
-    required: true
-  },
-},
-{
-  timestamps: true
+  fechaCreada: {
+    type: Date,
+    default: Date.now
+  }
 })
 
 horaSchema.plugin(AutoIncrement, {
